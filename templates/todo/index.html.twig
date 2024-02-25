@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Todo index{% endblock %}
+
+{% block body %}
+    <h1>Todo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th> <a href="{{ path('app_todo_index') }}?orderby=name&order={{ order }}">
+                        name
+                    </a></th>
+                <th>Description</th>
+                <th>fait</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+            <tr>
+                <td>{{ todo.id }}</td>
+                <td>{{ todo.name }}</td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.done }}</td>
+                <td>
+                    <a href="{{ path('app_todo_show', {'id': todo.id}) }}">show</a>
+                    <a href="{{ path('app_todo_edit', {'id': todo.id}) }}">edit</a>
+{#                    {{ form_start(filterForm ) }}#}
+{#                    {{ form_widget(filterForm.stillTodo ) }}#}
+{#                    {{ form_label(filterForm .stillTodo ) }}#}
+{#                    {{ form_errors(filterForm .stillTodo ) }}#}
+{#                    {{ form_help(filterForm .stillTodo ) }}#}
+{#                    <button class="btn">{{ button_label|default('Filtrer') }}</button>#}
+{#                    {{ form_end(filterForm ) }}#}
+{#                    {{ todo.isDone ? 'Yes' : 'No' }}#}
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_todo_new') }}">Create new</a>
+
+
+
+{% endblock %}
+
+
